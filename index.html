@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>随机点名</title>
+    <style>
+        /* 初始化页面，清除所有元素的内外边距 */
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        /* 盒子居中 */
+        div{
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            text-align: center;
+        }
+        /* 设置一下字体大小 */
+        h2{
+            font-size: 80px;
+        }
+        span{
+            font-size: 80px;
+			font-weight: bold;
+        }
+
+
+        /* 按钮居中 */
+        button{
+            position: absolute;
+            top: 75%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 150px;
+            height: 50px;
+            background-color: wheat;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h2>随机点名</h2>
+        <span id="name"></span>
+    </div>
+    <button id="button_text">stop</button>
+
+
+    <script>
+        // 获取标签
+        let nametxt=document.getElementById('name');
+        let button=document.getElementById('button_text');
+        // 创建一个数组存储名字
+        let uname=[
+		'陈逸阳',
+		'杜浩雨',
+		'杜佳乐',
+		'杜若彤',
+		'杜星昊',
+		'葛家硕',
+		'葛兆阳',
+		'侯斯瀚',
+		'黄佳美',
+		'黄梦涵',
+		'黄雅晗',
+		'黄远豪',
+		'李柏啸',
+		'李梦娇',
+		'刘锦心',
+		'刘静怡',
+		'刘心怡',
+		'刘一凡',
+		'刘永昭',
+		'禄昊添',
+		'马梓菲',
+		'齐曼',
+		'屈宇航',
+		'王晨曦',
+		'王冠迪',
+		'王姣',
+		'武琪凡',
+		'姚宇航',
+		'张理想',
+		'张赛琪',
+		'张怡洁',
+		'张艺萌',
+		'赵益华',
+		'左果鑫'
+		];
+        // 创建一个函数生成随机数字
+        function getrandom(min,max){
+            return Math.floor(Math.random()*(max-min-1)+min);
+        }
+        function clock(){
+            // 通过获取一个随机的数组下标实现随机获取一个名字，并将这个名字赋值给变量random
+            let random=uname[getrandom(0,uname.length-1)];
+            //将random塞到span里
+            nametxt.innerHTML=random;
+        };
+        // 打印名字已经实现了，下一步让没点击按钮前名字一直刷新
+        // 设置不停止时名字的刷新速度为30毫秒
+        let time=self.setInterval("clock()",30);
+        // 将开始与停止按钮绑定到按钮上，并通过按钮控制
+        let flag=false;
+        button.onclick=function(){
+            // 当flag标志为false时，点击按钮让刷新停止；
+            if(flag==false)
+            {
+                time=window.clearInterval(time);
+                // 按钮文字从stop变为start；
+                button.innerHTML='开始';
+                // 标志变更
+                flag=true;
+            }else{
+                // 当flag标志为true时，开始刷新，文字变更
+                time=self.setInterval("clock()",30);
+                button.innerHTML='停止';
+                flag=false;
+            }
+        }
+    </script>
+</body>
+</html>
